@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | GoSolo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">🌐 GoSolo</div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/plan">Plan Trip</a>
+            <a href="/companions">Companions</a>
+            <a href="/sos">SOS</a>
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Hello, {{ user_name }} 👋</h1>
+        <p>Welcome to your GoSolo Dashboard.</p>
+        <div class="hero-buttons">
+            <a href="/plan" class="btn blue">Start Planning</a>
+            <a href="/sos" class="btn white">Go to SOS</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Your Travel Toolkit</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="icon">🧭</div>
+                <h3>Smart Planner</h3>
+                <p>Use AI to build your personalized travel plan.</p>
+            </div>
+            <div class="card">
+                <div class="icon">👭</div>
+                <h3>Travel Companions</h3>
+                <p>Find verified female companions with shared interests.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📍</div>
+                <h3>SOS & Safety</h3>
+                <p>Configure check-ins, contacts, and location safety alerts.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

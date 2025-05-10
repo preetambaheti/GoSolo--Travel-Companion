@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GoSolo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">🌐 GoSolo</div>
+        <nav>
+            <a href="/">Home</a>
+            <a onclick="openLoginModal()">Dashboard</a>
+            <a onclick="openLoginModal()">Plan Trip</a>
+            <a onclick="openLoginModal()">Companions</a>
+            <a onclick="openLoginModal()">SOS</a>
+            <a onclick="openLoginModal()">Profile</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Travel with confidence and peace of mind</h1>
+        <p>Plan your journeys, stay informed about destinations, and access emergency assistance all in one place.</p>
+        <div class="hero-buttons">
+            <a onclick="openLoginModal()" class="btn blue">Explore Dashboard →</a>
+            <a onclick="openLoginModal()" class="btn white">Plan Your Trip</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Why Choose GoSolo?</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="icon">🗺️</div>
+                <h3>Smart Trip Planning</h3>
+                <p>Easily plan your trips with our intuitive tools. Get recommendations based on your preferences and safety considerations.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🛡️</div>
+                <h3>Emergency Assistance</h3>
+                <p>Access our 24/7 emergency support with one tap. Get connected to local emergency services anywhere in the world.</p>
+            </div>
+            <div class="card">
+                <div class="icon">👥</div>
+                <h3>Travel Community</h3>
+                <p>Join our community of travelers to share experiences, tips, and safety information about destinations worldwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to start your journey?</h2>
+        <p>Create your profile and begin planning safe, unforgettable adventures today.</p>
+        <a onclick="openLoginModal()" class="btn blue">Start Planning →</a>
+    </section>
+
+    <footer>
+        <div class="footer-columns">
+            <div>
+                <h4>GoSolo</h4>
+                <p>Your trusted companion for safe and enjoyable travel experiences around the world.</p>
+            </div>
+            <div>
+                <h4>Navigation</h4>
+                <ul>
+                    <li>Home</li>
+                    <li>Dashboard</li>
+                    <li>Plan Trip</li>
+                    <li>Companions</li>
+                    <li>SOS</li>
+                    <li>Profile</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <ul>
+                    <li>Travel Tips</li>
+                    <li>Safety Guidelines</li>
+                    <li>Destination Guides</li>
+                    <li>FAQs</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>support@gosolo.com<br>
+                +1 (555) 123-4567<br>
+                24/7 Emergency: +1 (555) 987-6543</p>
+            </div>
+        </div>
+        <p class="copyright">© 2025 GoSolo. All rights reserved. | Made with ❤️ for travelers worldwide</p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Login to GoSolo</h2>
+            <form method="POST" action="/login">
+                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openLoginModal() {
+            document.getElementById("loginModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("loginModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("loginModal");
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
