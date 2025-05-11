@@ -346,3 +346,485 @@ footer .copyright {
     object-fit: cover;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+/* hello */
+
+/* === Base Styles === */
+/* body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f9fc;
+  padding: 30px;
+  color: #333;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* === Card Layout === */
+/* .card-container {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 20px;
+  flex: 1;
+  min-width: 260px;
+  max-width: 360px;
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.card.danger {
+  border-left: 5px solid #dc3545;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+/* === Buttons === */
+/* .sos-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.primary-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+}
+
+/* === Emergency Contacts === */
+/* .contacts {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.contact-card {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-radius: 10px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  width: 350px;
+}
+
+.contact-card img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contact-card button {
+  margin-top: 8px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #e9ecef;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.contact-card.add-box {
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border: 2px dashed #ccc;
+  background-color: #f9f9f9;
+}
+
+/* === Floating SOS Icon === */
+/* .floating-sos {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: red;
+  color: white;
+  font-size: 22px;
+  padding: 15px 18px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* === Responsive === */
+/* @media screen and (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+  }
+
+  .contacts {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-card {
+    width: 90%;
+  } */ 
+/* } */ 
+
+
+/* === General Page Layout === */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f9fc;
+  padding: 30px;
+  color: #333;
+  margin: 0;
+}
+
+/* === Navbar === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 15px 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.navbar .logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #444;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.navbar ul li a.active,
+.navbar ul li a:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+/* === Trip Planner Container === */
+.trip-container {
+  padding: 40px;
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
+
+.stepper {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  gap: 50px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #888;
+}
+
+.step.active {
+  color: #2563eb;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  background-color: #ddd;
+  color: white;
+  font-weight: bold;
+  line-height: 30px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.step.active .circle {
+  background-color: #2563eb;
+}
+
+/* === Form Box === */
+.form-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  text-align: left;
+}
+
+.form-box h3 {
+  margin-bottom: 20px;
+}
+
+.form-box label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-box input,
+.form-box select {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.form-box .row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-box .row div {
+  flex: 1;
+}
+
+/* === Budget Cards Section === */
+.budget-options {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.budget-card {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.budget-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.budget-card strong {
+  display: block;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.budget-card p {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.budget-card .emoji {
+  font-size: 24px;
+}
+
+/* === Button === */
+.next-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 25px;
+  cursor: pointer;
+  float: right;
+}
+
+/* === Footer === */
+.footer {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+  margin-top: 50px;
+  font-size: 14px;
+}
+
+/* === Responsive Design === */
+@media screen and (max-width: 768px) {
+  .trip-container {
+    padding: 20px;
+  }
+
+  .budget-options {
+    flex-direction: column;
+  }
+
+  .budget-card {
+    width: 100%;
+  }
+
+  .form-box .row {
+    flex-direction: column;
+  }
+
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+}
+
+/* === Preferences Grid === */
+.preference-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.pref-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.pref-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.pref-card strong {
+  font-size: 16px;
+  display: block;
+  margin: 8px 0 5px;
+}
+
+.pref-card span {
+  font-size: 13px;
+  color: #666;
+}
+
+/* === Stepper Updated (Blue = Active, Light = Dimmed) === */
+.circle {
+  width: 30px;
+  height: 30px;
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  line-height: 30px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.circle.light {
+  background-color: #e0e7ff;
+  color: #4a5568;
+}
+
+.step.active span {
+  font-weight: bold;
+}
+
+.step span.light-label {
+  color: #888;
+}
+
+.prev-btn {
+  background-color: transparent;
+  border: 1px solid #2563eb;
+  color: #2563eb;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* === Travel Style Cards === */
+.pref-card {
+  background-color: white;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+  transition: 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  font-size: 14px;
+}
+
+.pref-card strong {
+  font-size: 15px;
+  display: block;
+  margin: 5px 0;
+}
+
+.pref-card span {
+  font-size: 13px;
+  color: #555;
+}
+
+.pref-card:hover {
+  border-color: #2563eb;
+}
+
+.pref-card.selected {
+  border-color: #2563eb;
+  background-color: #f0f6ff;
+}
+
+.preference-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}

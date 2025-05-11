@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Travel Planner - Preferences</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* Include styling exactly as before for navbar, stepper, and grid (can be placed in external CSS) */
+    .trip-container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .stepper {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+      gap: 50px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #888;
+    }
+
+    .circle {
+      width: 30px;
+      height: 30px;
+      background-color: #2563eb;
+      color: white;
+      font-weight: bold;
+      line-height: 30px;
+      border-radius: 50%;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .circle.light {
+      background-color: #e0e7ff;
+      color: #4a5568;
+    }
+
+    .step.active span {
+      font-weight: bold;
+    }
+
+    .step span.light-label {
+      color: #888;
+    }
+
+    .preference-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .pref-card {
+      background-color: white;
+      border: 1.5px solid #ccc;
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      transition: 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      font-size: 14px;
+    }
+
+    .pref-card strong {
+      font-size: 15px;
+      display: block;
+      margin: 5px 0;
+    }
+
+    .pref-card span {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .pref-card.selected {
+      border-color: #2563eb;
+      background-color: #f0f6ff;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 25px;
+    }
+
+    .btn.next-btn {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    .floating-sos {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: red;
+      color: white;
+      font-size: 22px;
+      padding: 15px 18px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/3176/3176362.png" alt="Logo" width="24">
+      <span style="margin-left: 8px; font-weight: bold;">TravelSafe</span>
+    </div>
+    <div class="nav-right">
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/plan" class="active">Plan Trip</a>
+      <a href="/safety">Emergency</a>
+      <a href="/profile">Profile</a>
+    </div>
+  </nav>
+
+  <!-- Container -->
+  <div class="trip-container">
+    <h2>AI Travel Planner</h2>
+    <p>Create your perfect itinerary with our AI assistant</p>
+
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step">
+        <div class="circle light">1</div>
+        <span class="light-label">Destination</span>
+      </div>
+      <div class="step active">
+        <div class="circle">2</div>
+        <span>Preferences</span>
+      </div>
+    </div>
+
+    <h3>What's your travel style?</h3>
+    <p>Select one or more preferences</p>
+
+    <!-- FORM starts here -->
+    <form action="/generate" method="GET">
+      <!-- Hidden fields from previous page -->
+      <input type="hidden" name="destination" value="{{ request.args.get('destination') }}">
+      <input type="hidden" name="start_date" value="{{ request.args.get('start_date') }}">
+      <input type="hidden" name="end_date" value="{{ request.args.get('end_date') }}">
+      <input type="hidden" name="budget" value="{{ request.args.get('budget') }}">
+
+      <!-- Style selection -->
+      <div class="preference-grid">
+        {% for style in ['Cultural Explorer', 'Food Enthusiast', 'Photography', 'Adventure Seeker', 'Budget Backpacker', 'Relaxation', 'Social Traveler', 'Mix of Everything'] %}
+        <label class="pref-card">
+          <input type="checkbox" name="styles" value="{{ style }}" hidden>
+          {{ style == 'Cultural Explorer' and '🏛️' or '' }}
+          {{ style == 'Food Enthusiast' and '🍜' or '' }}
+          {{ style == 'Photography' and '📷' or '' }}
+          {{ style == 'Adventure Seeker' and '⛰️' or '' }}
+          {{ style == 'Budget Backpacker' and '🎒' or '' }}
+          {{ style == 'Relaxation' and '🧘' or '' }}
+          {{ style == 'Social Traveler' and '🤝' or '' }}
+          {{ style == 'Mix of Everything' and '🔀' or '' }}
+          <br><strong>{{ style }}</strong>
+          <br><span>
+            {% if style == 'Cultural Explorer' %}Museums, historical sites
+            {% elif style == 'Food Enthusiast' %}Street food, local cuisine
+            {% elif style == 'Photography' %}Scenic, aesthetic places
+            {% elif style == 'Adventure Seeker' %}Outdoor fun, trekking
+            {% elif style == 'Budget Backpacker' %}Affordable local experiences
+            {% elif style == 'Relaxation' %}Spa, leisure, calm travel
+            {% elif style == 'Social Traveler' %}Interact with people, culture
+            {% else %}Blend of every category
+            {% endif %}
+          </span>
+        </label>
+        {% endfor %}
+      </div>
+
+      <button type="submit" class="btn next-btn">Generate Itinerary</button>
+    </form>
+  </div>
+
+  <!-- SOS -->
+  <button class="floating-sos">🚨</button>
+
+  <!-- JS to toggle selected styles -->
+  <script>
+    document.querySelectorAll('.pref-card input[type="checkbox"]').forEach(input => {
+      input.addEventListener('change', () => {
+        input.closest('.pref-card').classList.toggle('selected', input.checked);
+      });
+    });
+  </script>
+</body>
+</html>

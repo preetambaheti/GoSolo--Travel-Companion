@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your AI Travel Itinerary</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      color: #2563eb;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    p.description {
+      text-align: center;
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .accordion-container {
+      margin-top: 30px;
+    }
+
+    .accordion-card {
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .accordion-btn {
+      background-color: #2563eb;
+      color: white;
+      padding: 15px 20px;
+      width: 100%;
+      text-align: left;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .accordion-btn:hover {
+      background-color: #1e4fd6;
+    }
+
+    .accordion-panel {
+      padding: 15px 20px;
+      background-color: #f9f9f9;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .button-bar {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .btn {
+      background-color: #2563eb;
+      color: white;
+      padding: 10px 20px;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 0 10px;
+    }
+
+    .btn:hover {
+      background-color: #1e4fd6;
+    }
+
+    .floating-sos {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: red;
+      color: white;
+      font-size: 22px;
+      padding: 15px 18px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      .btn {
+        width: 90%;
+        margin: 10px 0;
+      }
+
+      .floating-sos {
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Your Personalized AI Itinerary ✈️</h2>
+    <p class="description">Here's your day-by-day trip plan based on your preferences</p>
+
+    <!-- Accordion Itinerary Rendering -->
+    <div class="accordion-container">
+      {% for block in blocks %}
+        <div class="accordion-card">
+          <button class="accordion-btn" onclick="toggleAccordion(this)">
+            {{ block.title }}
+          </button>
+          <div class="accordion-panel">
+            {{ block.content | safe }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="button-bar">
+      <a href="/dashboard"><button class="btn">Back to Dashboard</button></a>
+      <a href="/plan"><button class="btn">Plan Another Trip</button></a>
+    </div>
+    <!-- Lock Itinerary Button -->
+    <form action="/lock-itinerary" method="POST" style="text-align: center; margin-top: 20px;">
+    <input type="hidden" name="destination" value="{{ destination }}">
+    <input type="hidden" name="start_date" value="{{ start_date }}">
+    <input type="hidden" name="end_date" value="{{ end_date }}">
+    <input type="hidden" name="budget" value="{{ budget }}">
+    {% for style in styles %}
+        <input type="hidden" name="styles" value="{{ style }}">
+    {% endfor %}
+    <button type="submit" class="btn">Lock My Itinerary</button>
+    </form>
+  </div>
+
+  <!-- SOS Floating Button -->
+  <button class="floating-sos">🚨</button>
+
+  <!-- Accordion Script -->
+  <script>
+    function toggleAccordion(button) {
+      const panel = button.nextElementSibling;
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Safety Center</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Safety Center</h2>
+  <p>Tools and resources to keep you safe during your travels</p>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <div class="card-container">
+    <!-- SOS CARD -->
+    <div class="card danger">
+      <h3>Emergency SOS</h3>
+      <p>Quickly alert emergency contacts with your location and situation.</p>
+      <form action="/sos" method="POST" onsubmit="return sendSOS(event)">
+        <input type="hidden" name="location" id="sos-location">
+        <button type="submit" class="sos-btn">📞 Activate SOS</button>
+      </form>
+    </div>
+
+    <!-- LOCATION SHARING -->
+    <div class="card">
+      <h3>Location Sharing</h3>
+      <p>Share your real-time location with trusted emergency contacts.</p>
+      <button class="primary-btn" onclick="shareLocation()">📍 Share Location</button>
+    </div>
+
+    <!-- SAFETY CHECK-INS -->
+    <div class="card">
+      <h3>Safety Check-ins</h3>
+      <p>Set up periodic check-ins. Contacts are notified if you miss one.</p>
+      <select id="checkin-interval">
+        <option>Every 10 mins</option>
+        <option>Every 20 mins</option>
+        <option>Every 30 mins</option>
+        <option>Every 40 mins</option>
+        <option>Every 50 mins</option>
+      </select>
+      <br><br>
+      <button class="primary-btn">⏰ Set Check-ins</button>
+    </div>
+  </div>
+
+  <h3>Emergency Contacts</h3>
+  <div class="contacts">
+    <!-- Sample Contact 1 -->
+    <div class="contact-card">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah">
+      <div>
+        <strong>Sarah Johnson</strong><br>
+        Sister<br>
+        📞 +1 (555) 123-4567<br>
+        <button>Edit</button>
+        <button>Call</button>
+      </div>
+    </div>
+
+    <!-- Sample Contact 2 -->
+    <div class="contact-card">
+      <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael">
+      <div>
+        <strong>Michael Chen</strong><br>
+        Friend<br>
+        📞 +1 (555) 987-6543<br>
+        <button>Edit</button>
+        <button>Call</button>
+      </div>
+    </div>
+
+    <!-- Add Contact Box -->
+    <div class="contact-card add-box">
+      <div>
+        <strong>Add Emergency Contact</strong><br>
+        Add trusted friends or family who can be contacted in case of emergency.<br><br>
+        <button>Add Contact</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating SOS Icon (Optional) -->
+  <button class="floating-sos">🚨</button>
+
+  <!-- JS Script -->
+  <script>
+    function sendSOS(event) {
+  event.preventDefault(); // stops form from submitting prematurely
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      document.getElementById('sos-location').value =
+        "https://maps.google.com/?q=" + position.coords.latitude + "," + position.coords.longitude;
+      event.target.submit(); // only submit after setting location
+    }, function() {
+      alert("Please allow location access to send SOS.");
+    });
+  } else {
+    alert("Geolocation not supported.");
+  }
+}
+
+    function shareLocation() {
+      alert("📍 Location shared with emergency contacts! (This is a placeholder feature)");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan Your Trip</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .budget-options {
+      display: flex;
+      gap: 20px;
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+
+    .budget-card {
+      flex: 1;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: 0.3s ease;
+      cursor: pointer;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .budget-card:hover {
+      border-color: #2563eb;
+    }
+
+    .budget-card input[type="radio"] {
+      display: none;
+    }
+
+    .budget-card.selected {
+      border-color: #2563eb;
+      background-color: #f0f6ff;
+    }
+
+    .budget-card .emoji {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .budget-card strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 16px;
+    }
+
+    .budget-card p {
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🌐 TravelSafe</div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/plan" class="active">Plan Trip</a></li>
+      <li><a href="/safety">Emergency</a></li>
+      <li><a href="/profile">Profile</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="trip-container">
+    <h2>Plan Your Trip</h2>
+    <p>Fill in the details below to create your personalized travel plan</p>
+
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step active">
+        <div class="circle">1</div>
+        <span>Destination</span>
+      </div>
+      <div class="step">
+        <div class="circle light">2</div>
+        <span class="light-label">Preferences</span>
+      </div>
+    </div>
+
+    <!-- Destination Form -->
+    <div class="form-box">
+      <h3>🌍 Destination Details</h3>
+      <form action="/preferences" method="GET">
+        <label>Where are you going?</label>
+        <input type="text" name="destination" placeholder="📍 City, Country" required>
+
+        <div class="row">
+          <div>
+            <label>Start Date</label>
+            <input type="date" name="start_date" required>
+          </div>
+          <div>
+            <label>End Date</label>
+            <input type="date" name="end_date" required>
+          </div>
+        </div>
+
+        <label>What is Your Budget?</label>
+        <div class="budget-options">
+          <label class="budget-card">
+            <input type="radio" name="budget" value="Cheap" required>
+            <div class="emoji">💵</div>
+            <strong>Cheap</strong>
+            <p>Stay conscious of costs</p>
+          </label>
+          <label class="budget-card">
+            <input type="radio" name="budget" value="Moderate">
+            <div class="emoji">🪙</div>
+            <strong>Moderate</strong>
+            <p>Keep cost on the average side</p>
+          </label>
+          <label class="budget-card">
+            <input type="radio" name="budget" value="Luxury">
+            <div class="emoji">💸</div>
+            <strong>Luxury</strong>
+            <p>Don't worry about cost</p>
+          </label>
+        </div>
+
+        <button class="next-btn" type="submit">Continue ➜</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Optional: Script to highlight selected card -->
+  <script>
+    const cards = document.querySelectorAll(".budget-card");
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        cards.forEach(c => c.classList.remove("selected"));
+        card.classList.add("selected");
+        card.querySelector('input[type="radio"]').checked = true;
+      });
+    });
+  </script>
+</body>
+</html>

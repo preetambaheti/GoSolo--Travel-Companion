@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Matches</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7f9fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      color: #111827;
+      text-align: center;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #111827;
+    }
+
+    .tag {
+      background-color: #e0e7ff;
+      color: #3730a3;
+      padding: 4px 10px;
+      margin: 3px;
+      border-radius: 20px;
+      font-size: 12px;
+      display: inline-block;
+    }
+
+    .message-btn {
+      margin-top: 10px;
+      background-color: #10b981;
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .message-btn:hover {
+      background-color: #059669;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your Matched Companions</h2>
+
+    {% if matches %}
+      <div class="card-grid">
+        {% for m in matches %}
+          <div class="card">
+            <img src="{{ m.profile_pic }}" alt="{{ m.name }}">
+            <h2>{{ m.name }}</h2>
+            <p>{{ m.bio }}</p>
+            <p>📍 Destination: {{ m.destination }}</p>
+            <p>🗓️ {{ m.start_date }} to {{ m.end_date }}</p>
+            <p>💰 Budget: {{ m.budget }}</p>
+            <div>
+              {% for style in m.styles %}
+                <span class="tag">{{ style }}</span>
+              {% endfor %}
+            </div>
+            <form action="/chat/{{ m.user_id }}" method="get">
+                <button type="submit" class="message-btn">💬 Message</button>
+            </form>
+
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="text-align:center;">No matches yet. Connect with fellow travelers!</p>
+    {% endif %}
+  </div>
+</body>
+</html>
